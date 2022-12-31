@@ -1,0 +1,19 @@
+#!/bin/bash
+
+PS4='\033[0;33m+$?(${BASH_SOURCE}:${LINENO}):\033[0m ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+
+if [[ -z "$1" ]]; then
+    echo "No command number passed"
+    exit 2
+fi
+
+set -x
+
+exists=$( set -x; history -r; fc -l -1000 | grep  ^$1 -- 2>/dev/null )
+
+if [[ -n $exists ]]; then
+    fc -s -- "$1"
+else
+    echo "Command number $1 not found"
+    exit 2
+fi

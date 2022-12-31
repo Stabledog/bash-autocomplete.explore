@@ -1,0 +1,15 @@
+# lab1-completion
+
+_lab1()  {
+    local cur prev opts
+
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    #prev="${COMP_WORDS[COMP_CWORD-1]}"
+    local opts="red redis green greenish ye yellow"
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur} ) )
+    return 0
+}
+
+complete -F _lab1 lab1
